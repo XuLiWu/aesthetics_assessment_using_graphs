@@ -1,0 +1,14 @@
+torch
+torchvision
+tqdm
+termcolor
+h5py
+pandas
+tensorboardX
+scikit-learn
+matplotlib
+torch-scatter
+torch-sparse
+torch-cluster
+torch-spline-conv
+torch-geometric
