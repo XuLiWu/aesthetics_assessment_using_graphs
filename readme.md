@@ -1,5 +1,5 @@
 ## Aspect Ratio and Spatial Layout Aware Image Aesthetics Assessment UsingGraph Attention Network
-###Overview
+### Overview
 There are two stages in the pipeline. 
 - **Feature Graph Construction**
 ![Alt text](figures/Architecture_(a).png "Title")
@@ -12,14 +12,14 @@ Currently, this code can
 - plot PLCC, SRCC, Accuracy, Balanced Accuracy, MSE Loss, Confusion Matrix, Mean Opinion Score.
 - given an input image and a trained model, predict the score.
 
-###Environment
+### Environment
 - Ubuntu 18.04
 - Python 3.6.9
 - CUDA 10.2
 - pip 20.2.4
 - nvidia driver v-450.66
 
-###Installing Dependencies
+### Installing Dependencies
 ``sh install_requirements.sh``
 
 The full list of library versions used is provided additionally in the file **requirements.txt**. In case of errors while installing the geometric modules, make sure the pip version matches the one above. The installation of the geometric modules may be slow.
@@ -27,9 +27,9 @@ The full list of library versions used is provided additionally in the file **re
 More information is available in the official page:
 https://github.com/rusty1s/pytorch_geometric  
 
-###Aesthetic Visual Analysis (AVA) Dataset
+### Aesthetic Visual Analysis (AVA) Dataset
 There are several crawlers available online for the dataset. For example [here](https://github.com/mtobeiyf/ava_downloader). There are roughly 230K images for training and 20K for testing. We use the same test set as Hosu *et al* [1]. Check the ``meta/`` directory.
-###Scripts
+### Scripts
 #### Feature Graph Construction
 `sh extract_graph.sh`
 
@@ -62,5 +62,5 @@ If everything works correctly, it should come like this
 ![Alt text](figures/Screenshot%20from%202020-11-21%2016-58-04.png "Title")
 
 ### Predict score on a single image using a trained model
-###References
+### References
 1. Hosu, V., Goldlucke, B. and Saupe, D., 2019. Effective aesthetics prediction with multi-level spatially pooled features. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 9375-9383).
