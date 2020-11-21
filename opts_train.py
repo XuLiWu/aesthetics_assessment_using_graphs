@@ -19,8 +19,8 @@ def parse_opts():
                     help='target augmentation strategy')
     parser.add_argument('--num_epochs', type=int, default=30,
                     help='upper epoch limit')
-    parser.add_argument('--lr_decay_after', type=int, default=1,
-                    help='start reducing learning rate after this number of epochs')                          
+    # parser.add_argument('--lr_decay_after', type=int, default=1,
+    #                 help='start reducing learning rate after this number of epochs')
     parser.add_argument('--lr', type=float, default=0.0001,
                     help='initial learning rate')
     parser.add_argument('--batch_size', type=int, default = 32, metavar='N',

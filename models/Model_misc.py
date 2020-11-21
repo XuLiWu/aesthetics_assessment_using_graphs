@@ -1,43 +1,29 @@
 import torch
-import   PNASNet_Base, ResNet_Base, Graph_Models
+import Inception_ResNet_V2_Base, Graph_Models
 from termcolor import colored
-import torchvision
-
-class Identity(torch.nn.Module):
-    def __init__(self):
-        super(Identity, self).__init__()
-
-    def forward(self, x):
-        return x
 
 def load(args, dset_classes):
-
     if args.id in ['AIAG', 'AIAG_Extraction']:
-
-        if args.base_model == 'nasnetalarge':
+        if args.base_model == 'inceptionresnetv2':
             if args.id in ['AIAG_Extraction']:
-                model = PNASNet_Base.pnasnet5large(num_classes=1000, pretrained='imagenet')
-        elif args.base_model == 'resnet50':
-            if args.id in ['AIAG_Extraction']:
-                model = ResNet_Base.resnet50(True)
+                model = Inception_ResNet_V2_Base.inceptionresnetv2()
             else:
-                model = Graph_Models.Net_GAT_Conv_SoA_1(args, dset_classes)
+                # Specify the particular baseline model
+                model = Graph_Models.GAT_x3_GATP_MH(args)
         else:
             print('Wrong model specified: %s' % (args.basemodel))
             exit(1)
     else:
-        print ('Wrong id specified: %s'%(args.id))
+        print('Wrong id specified: %s' % (args.id))
         exit(1)
-        
 
     if args.start_from != None:
         model.load_state_dict(torch.load(args.start_from)['model'])
-        print(colored('PTM Loaded from: %s'%(args.start_from),'white'))
+        print(colored('PTM Loaded from: %s' % args.start_from, 'white'))
     if args.data_precision == 16:
         return model.half().cuda()
     elif args.data_precision == 32:
         return model.float().cuda()
     else:
-        print ('Wrong precision specified: %s'%(args.data_precision))
+        print('Wrong precision specified: %s' % (args.data_precision))
         exit(1)
-

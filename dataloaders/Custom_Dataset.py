@@ -45,10 +45,10 @@ class AIAG_Dataset_Pandas(data.Dataset):
         #pdb.set_trace()
         return ids.drop([ids.index[i] for i in missing_indices], axis=0)
 
-    def select_K_training_samples(self, ids):
+    def select_K_training_samples(self, ids):#
         #pdb.set_trace()
-        train_idxs = ids[ids['set_x'] != 'test']
-        train_idxs = train_idxs[train_idxs['set_y'] != 'test']
+        train_idxs = ids[ids['set_x'] == 'training']
+        # train_idxs = train_idxs[train_idxs['set_y'] != 'test']
         #test_idxs = ids[ids['set_x'] == 'test']
         train_drop_idxs = [*range(len(train_idxs))];
         #shuffle(train_drop_idxs);
@@ -62,13 +62,17 @@ class AIAG_Dataset_Pandas(data.Dataset):
     def select_K_test_samples(self, ids):
         #pdb.set_trace()
         #train_idxs = ids[ids['set_x'] != 'test']
-        test_idxs = ids[ids['set_x'] != 'training']
-        test_idxs = test_idxs[test_idxs['set_x'] != 'validation']
-        test_idxs = test_idxs[test_idxs['set_y'] != 'training']
+        test_idxs = ids[ids['set_x'] == 'test']
+        # test_idxs = test_idxs[test_idxs['set_x'] != 'validation']
+        # test_idxs = test_idxs[test_idxs['set_y'] != 'training']
 
         #train_drop_idxs = range(self.pilot, len(train_idxs))
         test_drop_idxs = [*range(len(test_idxs))]; #shuffle(test_drop_idxs); #train_drop_idxs = test_drop_idxs[self.pilot:]
         test_drop_idxs = test_drop_idxs[self.pilot:]
+        # if self.pilot != -1:
+        #     test_drop_idxs = test_drop_idxs[1000:]
+        # else:
+        #     test_drop_idxs = test_drop_idxs[self.pilot:]
 
         #pd.concat([ids.drop([train_idxs.index[i] for i in train_drop_idxs]), ava_rating_test_data], ignore_index=True)
         #train_drop_ids = ids.drop([train_idxs.index[i] for i in train_drop_idxs])
@@ -115,7 +119,7 @@ class AIAG_Dataset_PyTorch_HDF5_MLSP_3(AIAG_Dataset_Pandas):
             # img = features[self.imgs[index][0]].value[0]
             if not self.phase == 'test':
                 try:
-                    img = features[self.groups[np.random.randint(len(self.groups))]][self.imgs[index][0]].value
+                    img = np.array(features[self.groups[np.random.randint(len(self.groups))]][self.imgs[index][0]])
                     # img = features[self.groups[0]][self.imgs[index][0]].value
                 except:
                     # print('File %s not found'%(self.imgs[index][0]))
@@ -130,7 +134,7 @@ class AIAG_Dataset_PyTorch_HDF5_MLSP_3(AIAG_Dataset_Pandas):
             else:
                 # img = features[self.groups[0]][self.imgs[index][0]].value
                 try:
-                    img_list = [features[g][self.imgs[index][0]].value for g in self.groups]
+                    img_list = [np.array(features[g][self.imgs[index][0]]) for g in self.groups]
                 except:
                     # print('File %s not found'%(self.imgs[index][0]))
                     return None, None, None
@@ -173,6 +177,7 @@ class AIAG_Dataset_PyTorch_HDF5_MLSP_3(AIAG_Dataset_Pandas):
 
 
     def collate(self, batch):
+        # pdb.set_trace()
 
         batch = list(filter (lambda x:x is not None and x[0] is not None and x[1] is not None, batch))
         #return dataloader.default_collate(batch)
@@ -180,8 +185,9 @@ class AIAG_Dataset_PyTorch_HDF5_MLSP_3(AIAG_Dataset_Pandas):
         #data = [item[0] for item in batch]  # just form a list of tensor
         #data = torch.stack(data, dim = 0)
         if not self.phase == 'test':
+            # pdb.set_trace()
             graph = Batch_G.from_data_list([item[0] for item in batch])
-            data = None
+            # data = None
             #graph.x = graph.x.cuda(); graph.edge_index = graph.edge_index.cuda(); graph.edge_attr = graph.edge_attr.cuda()
             target = [item[1] for item in batch]
             label = tuple([item[2] for item in batch])
@@ -189,11 +195,11 @@ class AIAG_Dataset_PyTorch_HDF5_MLSP_3(AIAG_Dataset_Pandas):
         else:
             # pdb.set_trace()
             graph = Batch_G.from_data_list([*itertools.chain.from_iterable([item[0] for item in batch])])
-            data = None
+            # data = None
             target = [*itertools.chain.from_iterable([item[1] for item in batch])]
             label = tuple(itertools.chain.from_iterable([item[2] for item in batch]))
             target = tuple(target)
-        return [[data, graph], target, label]
+        return [graph, target, label]
 
 
 class AIAG_Dataset(AIAG_Dataset_Pandas):
