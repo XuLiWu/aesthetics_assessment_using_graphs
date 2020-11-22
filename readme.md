@@ -53,13 +53,15 @@ The results can be monitored during training by opening tensorboard separately.
 `tensorboard --logdir path/to/visuals/`
 
 If everything works correctly, it should look like this
-- Curves
 
-![Alt text](figures/Screenshot%20from%202020-11-21%2016-50-07.png "Title")
 
-- Plots
+| Plots  | Images |
+| ------------- | ------------- |
+| ![Alt text](figures/Screenshot%20from%202020-11-21%2016-50-07.png "Title")  | ![Alt text](figures/Screenshot%20from%202020-11-21%2016-58-04.png "Title")  |
 
-![Alt text](figures/Screenshot%20from%202020-11-21%2016-58-04.png "Title")
+
+
+
 
 ### Predict score on a single or set of images using a trained model
 ``sh predict_images.sh``
