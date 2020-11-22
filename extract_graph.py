@@ -21,7 +21,11 @@ import Model_misc as mdm
 args = opts.parse_opts()
 model = mdm.load(args, range(10))
 model.eval()
-print (colored('\n'.join(sorted([str(i) + ' : ' + str(j) for (i,j) in vars(args).items()])),'white'))
+
+
+print('############ Parameters ##############')
+print(colored('\n'.join(sorted([str(i) + ' : ' + str(j) for (i, j) in vars(args).items()])), 'cyan'))
+print('######################################')
 
 # input augmentation
 DAug = ag.Augmentation(args.aug, args.data_precision);

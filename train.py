@@ -24,7 +24,9 @@ import Visual_misc as vm
 
 # pdb.set_trace()
 args = opts_train.parse_opts()
+print('############ Parameters ##############')
 print(colored('\n'.join(sorted([str(i) + ' : ' + str(j) for (i, j) in vars(args).items()])), 'cyan'))
+print('######################################')
 
 # input augmentation
 DAug = ag.Augmentation(args.aug, args.data_precision);

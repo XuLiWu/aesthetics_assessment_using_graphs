@@ -112,29 +112,27 @@ class AIAG_Dataset_PyTorch_HDF5_MLSP_3(AIAG_Dataset_Pandas):
         classes = range(self.args.A2_D)
         return img_labels, classes, class_count
 
-    def __getitem__(self, index, g_index = -448):
-        #self.features = h5py.File(self.feature_path + 'feats_' + self.phase + '.h5', 'r')
+    def __getitem__(self, index, g_index=-448):
+        # self.features = h5py.File(self.feature_path + 'feats_' + self.phase + '.h5', 'r')
         # pdb.set_trace()
         with h5py.File(self.feature_path, 'r') as features:
             # img = features[self.imgs[index][0]].value[0]
             if not self.phase == 'test':
                 try:
-                    img = np.array(features[self.groups[np.random.randint(len(self.groups))]][self.imgs[index][0]])
-                    # img = features[self.groups[0]][self.imgs[index][0]].value
+                    img = features[self.groups[np.random.randint(len(self.groups))]][self.imgs[index][0]].value
                 except:
-                    # print('File %s not found'%(self.imgs[index][0]))
+                    print('File %s not found' % (self.imgs[index][0]))
                     return None, None, None
                 target = self.imgs[index][1]
                 img = self.transform(img)
                 nodes, pos = GU.construct_graph_13(img, [0.0, 0.875, 0.0, 0.875])
                 d = Data_G(x=nodes, pos=pos, y=target)
-                d = GU.Zero_Node_As_Global_Node()(d)
                 id = self.imgs[index][0]
                 # img = features[self.imgs[index][0]].value
             else:
                 # img = features[self.groups[0]][self.imgs[index][0]].value
                 try:
-                    img_list = [np.array(features[g][self.imgs[index][0]]) for g in self.groups]
+                    img_list = [features[g][self.imgs[index][0]].value for g in self.groups]
                 except:
                     # print('File %s not found'%(self.imgs[index][0]))
                     return None, None, None
@@ -143,34 +141,9 @@ class AIAG_Dataset_PyTorch_HDF5_MLSP_3(AIAG_Dataset_Pandas):
                 # target = [self.imgs[index][1]] * len(img_t_list)
                 nodes_pos_list = [GU.construct_graph_13(img, [0.0, 0.875, 0.0, 0.875]) for img in img_t_list]
                 d = [Data_G(x=nodes, pos=pos, y=target) for nodes, pos in nodes_pos_list]
-                d = [ GU.Zero_Node_As_Global_Node()(i) for i in d]
                 target = [target] * len(d)
                 id = [self.imgs[index][0]] * len(d)
-            #img = img[0]
-
-            # if self.transform is not None:
-
-            # if self.target_transform is not None:
-            #     target = self.target_transform(target)
-            #pdb.set_trace()
-            #last_layer_feat = img[g_index:,:]
-            # last_layer_feat = img
-            #nodes, pos, edge_index_local,edge_index_global  = GU.construct_graph_7(last_layer_feat, [0.0, 0.875, 0.0, 0.875])
-            #nodes, pos, edge_index, edge_attr = GU.construct_graph_10(last_layer_feat, [0.0, 0.875, 0.0, 0.875])
-
-
-            #pdb.set_trace()
-            #edge_index, edge_attr = utils_G.remove_self_loops(edge_index, edge_attr)
-            #pdb.set_trace()
-            # d = Data_G(x=nodes, edge_index=edge_index.long(), pos=pos[:,1:], y=target)
-            # d = GU.graph_transform_1()(d)
-            # pdb.set_trace()
-
-            #d = Data_G(x=nodes, edge_index=edge_index.long(), edge_attr = edge_attr,  pos=pos, y=target)
-
-            #pdb.set_trace()
-            # d = self.graph_T(d)
-            return  d,  target, id
+            return d, target, id
 
     def __len__(self):
         return len(self.imgs)

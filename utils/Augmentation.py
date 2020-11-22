@@ -16,7 +16,7 @@ class Augmentation:
     def __init__(self, strategy, data_precision):
         self.strategy = strategy;
         self.data_precision = data_precision
-        print("Data Augmentation Initialized with strategy %s" % (self.strategy));
+        # print("Data Augmentation Initialized with strategy %s" % (self.strategy));
 
     
     def applyTransforms(self):
