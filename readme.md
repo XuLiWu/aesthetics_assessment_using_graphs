@@ -6,11 +6,11 @@ There are two stages in the pipeline.
 - **Score Regression using GNN**
 ![Alt text](figures/Architecture_(b).png "Title")
 
-Currently, this code has the following functionalities:
-- extract feature-graphs from AVA images using Inception-Resnet-V2 and 8 augmentations (4 corner crops + flip)
-- train the 6 baseline networks as mentioned in Table 2 of the paper.
-- plot PLCC, SRCC, Accuracy, Balanced Accuracy, MSE Loss, Confusion Matrix, Mean Opinion Score.
-- given an input image/ a set of images and a trained model ([pre-trained weights](https://drive.google.com/drive/folders/10kxMM7etoszz4LxLGczdmqsZORSy1OyV?usp=sharing)), predict the score.
+###Functionalities:
+- Extract feature-graphs from AVA images using Inception-Resnet-V2 and 8 augmentations (4 corner crops + flip)
+- Train the 6 baseline networks as mentioned in Table 2 of the paper.
+- Plot PLCC, SRCC, Accuracy, Balanced Accuracy, MSE Loss, Confusion Matrix, Mean Opinion Score.
+- Given an input image/ a set of images and a trained model ([pre-trained weights](https://drive.google.com/drive/folders/10kxMM7etoszz4LxLGczdmqsZORSy1OyV?usp=sharing)), predict the score.
 
 ### Environment
 - Ubuntu 18.04
@@ -63,6 +63,7 @@ If everything works correctly, it should look like this
 
 ### Predict score on a single or set of images using a trained model
 ``sh predict_images.sh``
+
 The images are to be copied in the ``DIR`` directory, as specified in ``predict_images.sh``. For example, ``samples`` as in the script.
 
 Pre-trained weights are available [here](https://drive.google.com/drive/folders/10kxMM7etoszz4LxLGczdmqsZORSy1OyV?usp=sharing).
