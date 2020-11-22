@@ -1,4 +1,4 @@
-## Aspect Ratio and Spatial Layout Aware Image Aesthetics Assessment UsingGraph Attention Network
+## Aspect Ratio and Spatial Layout Aware Image Aesthetics Assessment Using Graph Attention Network
 ### Overview
 There are two stages in the pipeline. 
 - **Feature Graph Construction**
@@ -6,7 +6,7 @@ There are two stages in the pipeline.
 - **Score Regression using GNN**
 ![Alt text](figures/Architecture_(b).png "Title")
 
-Currently, this code can
+Currently, this code has the following functionalities:
 - extract feature-graphs from AVA images using Inception-Resnet-V2 and 8 augmentations (4 corner crops + flip)
 - train the 6 baseline networks as mentioned in Table 2 of the paper.
 - plot PLCC, SRCC, Accuracy, Balanced Accuracy, MSE Loss, Confusion Matrix, Mean Opinion Score.
@@ -52,7 +52,7 @@ The results can be monitored during training by opening tensorboard separately.
 
 `tensorboard --logdir path/to/visuals/`
 
-If everything works correctly, it should come like this
+If everything works correctly, it should look like this
 - Curves
 
 ![Alt text](figures/Screenshot%20from%202020-11-21%2016-50-07.png "Title")
