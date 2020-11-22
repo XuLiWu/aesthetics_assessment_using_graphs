@@ -6,7 +6,7 @@ There are two stages in the pipeline.
 - **Score Regression using GNN**
 ![Alt text](figures/Architecture_(b).png "Title")
 
-###Functionalities:
+### Functionalities:
 - Extract feature-graphs from AVA images using Inception-Resnet-V2 and 8 augmentations (4 corner crops + flip)
 - Train the 6 baseline networks as mentioned in Table 2 of the paper.
 - Plot PLCC, SRCC, Accuracy, Balanced Accuracy, MSE Loss, Confusion Matrix, Mean Opinion Score.
