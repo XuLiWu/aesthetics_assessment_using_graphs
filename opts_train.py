@@ -17,7 +17,7 @@ def parse_opts():
                     help='data augmentation strategy')
     parser.add_argument('--aug_target', type=str, default = 'NO_TARGET_TRANSFORM',
                     help='target augmentation strategy')
-    parser.add_argument('--num_epochs', type=int, default=30,
+    parser.add_argument('--num_epochs', type=int, default=50,
                     help='upper epoch limit')
     # parser.add_argument('--lr_decay_after', type=int, default=1,
     #                 help='start reducing learning rate after this number of epochs')
@@ -49,6 +49,8 @@ def parse_opts():
                         help='basemodel')
     parser.add_argument('--data_precision', type=int, default=-1,
                         help='Floating point precision to use')
+    parser.add_argument('--model_name', type=str, default="Avg_Pool_FC",
+                        help='name of the pre-trained_model')
 
 
     #Checkpointing and visualization

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Directory where input images are stored
-DIR=samples
+DIR=/home/ghosalk/Pictures/sample_ava/
 
 # Model Template Name. Choose one from Graph_Models.py
 MODEL_NAME=GAT_x3_GATP_MH

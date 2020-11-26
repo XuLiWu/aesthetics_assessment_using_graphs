@@ -119,7 +119,7 @@ class AIAG_Dataset_PyTorch_HDF5_MLSP_3(AIAG_Dataset_Pandas):
             # img = features[self.imgs[index][0]].value[0]
             if not self.phase == 'test':
                 try:
-                    img = features[self.groups[np.random.randint(len(self.groups))]][self.imgs[index][0]].value
+                    img = np.array(features[self.groups[np.random.randint(len(self.groups))]][self.imgs[index][0]])
                 except:
                     print('File %s not found' % (self.imgs[index][0]))
                     return None, None, None
@@ -132,7 +132,7 @@ class AIAG_Dataset_PyTorch_HDF5_MLSP_3(AIAG_Dataset_Pandas):
             else:
                 # img = features[self.groups[0]][self.imgs[index][0]].value
                 try:
-                    img_list = [features[g][self.imgs[index][0]].value for g in self.groups]
+                    img_list = [np.array(features[g][self.imgs[index][0]]) for g in self.groups]
                 except:
                     # print('File %s not found'%(self.imgs[index][0]))
                     return None, None, None
@@ -182,6 +182,7 @@ class AIAG_Dataset(AIAG_Dataset_Pandas):
         self.imgs, self.classes, self.class_count = self.make_dataset()
 
     def make_dataset(self):
+        # pdb.set_trace()
         ids = self.remove_missing_files(pd.read_csv(self.data));
         #if self.pilot != -1:
         if self.phase == 'train':
@@ -198,7 +199,7 @@ class AIAG_Dataset(AIAG_Dataset_Pandas):
         return img_labels, classes, class_count
 
     def __getitem__(self, index):
-        #pdb.set_trace()
+        # pdb.set_trace()
         path, target, ids = self.imgs[index]
         try:
             img = self.loader(path)

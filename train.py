@@ -65,7 +65,7 @@ scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lambda epoch: (1 - epoc
 # Model and visuals save path
 model_path = args.save + 'Exp-' + args.exp_id + '_' + datetime.datetime.now().strftime("%I_%M%p_%B_%d_%Y") + '.model'
 print(colored("Visual path: " + args.save_visuals + 'Exp: ' + args.exp_id +
-              ' Tasks: ' + args.id + ' -- ' + datetime.datetime.now().strftime("%I:%M%p %B %d, %Y"), 'cyan'))
+              ' Tasks: ' + args.id + ' -- ' + datetime.datetime.now().strftime("%I:%M%p %B %d, %Y")))
 
 
 # main training method
@@ -88,7 +88,6 @@ def train():
             for count, data in enumerate(pbar_epoch):
                 inputs, labels, ids = data;
                 inputs.x = inputs.x.cuda();
-                inputs.edge_index = inputs.edge_index.long().cuda();
                 inputs.batch = inputs.batch.cuda()
                 inputs.pos = inputs.pos.cuda().float()
 

@@ -5,14 +5,6 @@ import torch.nn.functional as F
 from collections import OrderedDict
 import pdb
 
-# import pretrainedmodels
-
-# def load_NASNETLARGE():
-#     model_name = 'pnasnet5large'  # could be fbresnet152 or inceptionresnetv2
-#     model = pretrainedmodels.__dict__[model_name](num_classes=1000, pretrained='imagenet')
-#     return model
-
-
 
 class GATTP(nn.Module):
     def __init__(self, in_features =1024, out_features=64, heads=32):

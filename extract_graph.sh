@@ -10,7 +10,7 @@ EXPERIMENT_ID=Extraction
 DB=meta/A2P2_FULL_Corrected.CSV
 
 #Path to AVA images.
-DATAPATH=~/Desktop/AVADataSet/
+DATAPATH=/path/to/images/
 
 #Directory to store the features.
 SAVE_FEAT=dump/
@@ -27,7 +27,7 @@ FP=16
 #Number of images to extract features from. Use -1 if all images are to be used. Use a smaller value for debugging.
 PILOT=1000
 
- CUDA_VISIBLE_DEVICES=0 python3 -W ignore extract_graph.py --id $ID --db $DB --datapath $DATAPATH --pretrained --exp_id $EXPERIMENT_ID --feature_file_name $FEAT_FILE_NAME\
+ CUDA_VISIBLE_DEVICES=1 python3 -W ignore extract_graph.py --id $ID --db $DB --datapath $DATAPATH --pretrained --exp_id $EXPERIMENT_ID --feature_file_name $FEAT_FILE_NAME\
   --base_model $BASE_MODEL \
   --data_precision $FP \
   --save_feat $SAVE_FEAT --pilot $PILOT --n_workers 4

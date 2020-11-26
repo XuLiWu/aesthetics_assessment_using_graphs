@@ -9,7 +9,7 @@ def load(args, dset_classes):
                 model = Inception_ResNet_V2_Base.inceptionresnetv2()
             else:
                 # Specify the particular baseline model
-                model = Graph_Models.GAT_x3_GATP_MH(args)
+                model = getattr(Graph_Models, args.model_name)(args)
         else:
             print('Wrong model specified: %s' % (args.basemodel))
             exit(1)
