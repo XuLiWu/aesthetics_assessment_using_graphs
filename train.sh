@@ -6,7 +6,7 @@ ID=AIAG
 #This is the id of the particular run. Name as you wish
 EXPERIMENT_ID=Avg_Pool_ED
 
-# Model name
+# Model name. Check Graph_Models.py for other model names.
 MODEL=Avg_Pool_ED
 
 #Path to the CSV file containing AVA IDs

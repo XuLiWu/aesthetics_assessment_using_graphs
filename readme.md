@@ -43,7 +43,7 @@ Once the features are extracted, a GNN can be trained using
 Specify the necessary parameters in the script, as commented. A full list of training parameters can be found in
 ``opts_train.py``.
 We provide all the baseline models in Table 2 of the paper in ``Graph_Models.py``. A 
-particular model can be chosen by changing L11 in ``Model_misc.py``.
+particular model can be chosen by setting the `MODEL` variable in `train.sh`.
 
 During training, the model tests itself on the AVA test test after ``VAL_AFTER`` epochs. 
 
